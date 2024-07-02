@@ -1,7 +1,6 @@
 import os
 import subprocess
 import json
-import argparse
 from pathlib import Path
 from plantuml import PlantUML
 
@@ -16,7 +15,8 @@ def find_principals(lines: list[dict]):
     return principals
 
 
-def main(program_path: str):
+def dystar_visualization(args):
+    program_path = args.program_path
     process = subprocess.Popen([program_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     stdout, stderr = process.communicate()
     output = stdout.decode('utf-8')
@@ -60,7 +60,7 @@ def main(program_path: str):
     plantuml.append("@enduml")
 
     # Write generated plantuml code to file
-    # plantuml_file = Path("diagram.puml")
+    # plantuml_file = Path(f"{os.path.basename(program_path)}.puml")
     # plantuml_file.write_text("\n".join(plantuml))
 
     # Generate PNG from plantuml code
@@ -72,17 +72,3 @@ def main(program_path: str):
     # Open the generated PNG file in
     # the default image viewer.
     subprocess.Popen(["xdg-open", str(png_file)])
-
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
-        prog="DYStar Output Parser",
-        description="Parse the output of a DYStar protocol run and generate a Plantuml sequence diagram."
-    )
-    parser.add_argument(
-        "program_path",
-        help="Path to the DYStar program executable."
-    )
-    args = parser.parse_args()
-
-    main(args.program_path)
