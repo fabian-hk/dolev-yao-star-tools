@@ -4,12 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ccec5b6d-34d2-41aa-81cb-8b632af7c570" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/dystar_tool.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/validation.py" afterDir="false" />
+    <list default="true" id="ccec5b6d-34d2-41aa-81cb-8b632af7c570" name="Changes" comment="Cleanup">
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/Stateful.Proof.fst.jinja2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/Total.Proof.fst.jinja2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utility.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualization.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dystar_tool.py" beforeDir="false" afterPath="$PROJECT_DIR$/dystar_tool.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/validation.py" beforeDir="false" afterPath="$PROJECT_DIR$/validation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/visualization.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualization.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,18 +44,48 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Python.dystar_tool gen.executor": "Run",
     "Python.dystar_tool val.executor": "Run",
     "Python.dystar_tool vis.executor": "Run",
     "Python.dystar_tool.executor": "Run",
     "Python.main.executor": "Run",
     "Python.validation.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "/home/hauck/Downloads/github-copilot-intellij-1.5.2.5345.zip",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+    "last_opened_file_path": "/home/hauck/Documents/git/dystar-extrinsic-output-parser/templates",
+    "settings.editor.selected.configurable": "com.jetbrains.python.black.configuration.BlackFormatterConfigurable"
   }
 }]]></component>
-  <component name="RunManager" selected="Python.dystar_tool val">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.dystar_tool gen">
+    <configuration name="dystar_tool gen" type="PythonConfigurationType" factoryName="Python">
+      <module name="dystar-extrinsic-output-parser" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dystar_tool.py" />
+      <option name="PARAMETERS" value="gen $PROJECT_DIR$/../dolev-yao-star-extrinsic-2/examples/iso_dh" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="dystar_tool val" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="dystar-extrinsic-output-parser" />
       <option name="ENV_FILES" value="" />
@@ -95,6 +132,7 @@
     </configuration>
     <list>
       <item itemvalue="Python.dystar_tool vis" />
+      <item itemvalue="Python.dystar_tool gen" />
       <item itemvalue="Python.dystar_tool val" />
     </list>
     <recent_temporary>
@@ -119,14 +157,36 @@
       <option name="presentableId" value="Default" />
       <updated>1713454745849</updated>
     </task>
+    <task id="LOCAL-00001" summary="Add protocol and proof validation functionality">
+      <option name="closed" value="true" />
+      <created>1719934549823</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1719934549823</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Cleanup">
+      <option name="closed" value="true" />
+      <created>1719934671511</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1719934671511</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Add protocol and proof validation functionality" />
+    <MESSAGE value="Cleanup" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cleanup" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/validation.py</url>
-          <line>142</line>
+          <line>50</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>

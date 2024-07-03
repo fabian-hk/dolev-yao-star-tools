@@ -1,0 +1,43 @@
+module {{ module_name }}
+
+open Comparse
+open DY.Core
+open DY.Lib
+open {{ total_code }}
+open {{ stateful_code }}
+
+#set-options "--fuel 0 --ifuel 0 --z3cliopt 'smt.qi.eager_threshold=100'"
+
+(*** Cryptographic invariants ***)
+
+val protocol_crypto_usages: crypto_usages
+instance protocol_crypto_usages = default_crypto_usages
+
+#push-options "--ifuel 2 --fuel 0"
+val protocol_crypto_preds: crypto_predicates protocol_crypto_usages
+let protocol_crypto_preds = default_crypto_predicates protocol_crypto_usages
+#pop-options
+
+instance protocol_crypto_invs: crypto_invariants = {
+  usages = protocol_crypto_usages;
+  preds = protocol_crypto_preds;
+}
+
+(*** Proofs ***)
+{% for d in declarations.keys() %}
+val {{ d }}:
+ {% for arg in declarations[d] %} {{ arg.name }}:{{ arg.type }} ->{% endfor %}
+  Lemma
+  (requires
+    (* TODO add preconditions *)
+    admit()
+  )
+  (ensures
+    (* TODO add post-conditions *)
+    admit()
+  )
+let {{ d }} {% for arg in declarations[d] %}{{ arg.name }} {% endfor %}=
+  (* TODO proof lemma *)
+  admit();
+  ()
+{% endfor %}

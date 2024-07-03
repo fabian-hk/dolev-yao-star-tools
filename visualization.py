@@ -17,9 +17,11 @@ def find_principals(lines: list[dict]):
 
 def dystar_visualization(args):
     program_path = args.program_path
-    process = subprocess.Popen([program_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    process = subprocess.Popen(
+        [program_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE
+    )
     stdout, stderr = process.communicate()
-    output = stdout.decode('utf-8')
+    output = stdout.decode("utf-8")
     lines = []
     # Parse output lines as json and skip lines that are not valid json.
     for line in output.split("\n"):
@@ -54,9 +56,7 @@ def dystar_visualization(args):
             principals_copy = principals.copy()
             principals_copy.remove(sender)
             receiver = principals_copy[0]
-            plantuml.append(
-                f"{sender} -> {receiver} : {line['Content']}"
-            )
+            plantuml.append(f"{sender} -> {receiver} : {line['Content']}")
     plantuml.append("@enduml")
 
     # Write generated plantuml code to file
