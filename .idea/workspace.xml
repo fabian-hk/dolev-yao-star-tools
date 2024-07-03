@@ -4,19 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ccec5b6d-34d2-41aa-81cb-8b632af7c570" name="Changes" comment="Cleanup">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/generation.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/Stateful.Proof.fst.jinja2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/Total.Proof.fst.jinja2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utility.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="ccec5b6d-34d2-41aa-81cb-8b632af7c570" name="Changes" comment="Add proof structure generation subcommand">
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dystar_tool.py" beforeDir="false" afterPath="$PROJECT_DIR$/dystar_tool.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/validation.py" beforeDir="false" afterPath="$PROJECT_DIR$/validation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualization.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualization.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,13 +162,22 @@
       <option name="project" value="LOCAL" />
       <updated>1719934671511</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Add proof structure generation subcommand">
+      <option name="closed" value="true" />
+      <created>1719997290763</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1719997290763</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add protocol and proof validation functionality" />
     <MESSAGE value="Cleanup" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cleanup" />
+    <MESSAGE value="Add proof structure generation subcommand" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add proof structure generation subcommand" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -23,6 +23,12 @@ For this to work, the protocol code files must have the suffix
 `.Total.fst` and `.Stateful.fst` and the proof code files must
 have the suffix `.Total.Proof.fst` and `.Stateful.Proof.fst`.
 
+Currently, the following validations are done:
+
+1. Check that every protocol function has a corresponding proof function.
+2. Compare the parameters for the protocol function with the parameters
+    of the proof function and warn if they deviate.
+
 ## Generate Proof Structure
 
 The command `./dystar_tool gen <DYSTAR_PROTOCOL_FOLDER>` generates
