@@ -13,8 +13,8 @@ open {{ stateful_code }}
 
 (* TODO add trace invariants *)
 
-instance protocol_invs: protocol_invariants = {
-  crypto_invs = protocol_crypto_invs;
+instance protocol_invariants_protocol: protocol_invariants = {
+  crypto_invs = crypto_invariants_protocol;
   trace_invs = admit();
 }
 

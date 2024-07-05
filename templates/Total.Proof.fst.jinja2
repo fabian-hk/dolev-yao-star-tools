@@ -10,17 +10,17 @@ open {{ stateful_code }}
 
 (*** Cryptographic invariants ***)
 
-val protocol_crypto_usages: crypto_usages
-instance protocol_crypto_usages = default_crypto_usages
+val crypto_usages_protocol: crypto_usages
+instance crypto_usages_protocol = default_crypto_usages
 
 #push-options "--ifuel 2 --fuel 0"
-val protocol_crypto_preds: crypto_predicates protocol_crypto_usages
-let protocol_crypto_preds = default_crypto_predicates protocol_crypto_usages
+val crypto_predicates_protocol: crypto_predicates crypto_usages_protocol
+let crypto_predicates_protocol = default_crypto_predicates crypto_usages_protocol
 #pop-options
 
-instance protocol_crypto_invs: crypto_invariants = {
-  usages = protocol_crypto_usages;
-  preds = protocol_crypto_preds;
+instance crypto_invariants_protocol: crypto_invariants = {
+  usages = crypto_usages_protocol;
+  preds = crypto_predicates_protocol;
 }
 
 (*** Proofs ***)
