@@ -45,7 +45,7 @@ def dystar_visualization(args):
         if line["Type"] == "Session":
             if not namespaces or line["Tag"] in namespaces:
                 plantuml.append(
-                    f"\"{line['Principal']}\" -> \"{line['Principal']}\" : Session {preprocess_content(line)}"
+                    f"note over \"{line['Principal']}\": State {preprocess_content(line)}"
                 )
         # Use events to find out at which principal
         # we are right now in the protocol run.
