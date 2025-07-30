@@ -1,0 +1,17 @@
+{% for (d, impl) in zip(declarations.keys(), impl_functions.keys()) %}
+val {{ d }}:
+ {% for arg in declarations[d] %} {{ arg.name }}:{{ arg.type }} ->{% endfor %}
+  Lemma
+  (requires
+    trace_invariant tr
+  )
+  (ensures (
+    let (_, tr_out) = {{ impl }}{% for arg in impl_functions[impl] %} {{ arg }}{% endfor %} tr in
+    trace_invariant tr_out
+  ))
+  [SMTPat (trace_invariant tr); SMTPat ({{ impl }}{% for arg in impl_functions[impl] %} {{ arg }}{% endfor %} tr)]
+let {{ d }} {% for arg in declarations[d] %}{{ arg.name }} {% endfor %}=
+  (* TODO proof lemma *)
+  admit();
+  ()
+{% endfor %}

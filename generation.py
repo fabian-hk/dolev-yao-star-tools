@@ -51,7 +51,55 @@ def generate_proof(folder: Path, type: str):
         logger.error(f"File {os.path.basename(proof_file)} already exists in the destination")
 
 
+def generate_code_single_file(file: Path):
+    impl_val = utility.scan_val(file)
+    impl_let = utility.scan_let(file)
+    impl_comb = utility.combine_val_let(impl_val, impl_let)
+
+    gen_proof = utility.build_proof_functions(impl_comb)
+    logger.info(f"Generated proofs: {len(gen_proof)}")
+
+    # Check for already existing file and proofs
+    proof_file = Path(str(file).replace(".fst", ".Proof.fst")) # Heuristic for existing file
+    proof_val = {}
+    if proof_file.exists():
+        logger.info(f"Found already existing proof file {os.path.basename(proof_file)}")
+        proof_val = utility.scan_val(proof_file)
+
+        # Remove already existing proofs from generated proofs
+        for proof_name in proof_val.keys():
+            if proof_name in gen_proof:
+                del gen_proof[proof_name]
+                del impl_let[proof_name.removesuffix("_proof")]
+    else:
+        proof_file.write_text(f"""module {os.path.basename(proof_file).removesuffix(".fst")}
+
+open Comparse
+open DY.Core
+open DY.Lib
+""")
+
+    logger.info(f"Already existing proofs: {len(proof_val)}")
+    logger.info(f"Written proofs: {len(gen_proof)}")
+
+    environment = jinja2.Environment(loader=jinja2.FileSystemLoader("templates/"))
+    environment.globals.update(zip=zip)
+    template = environment.get_template("StatefulProofLemmaStructure.fst.jinja2")
+    content = template.render(
+        declarations=gen_proof,
+        impl_functions=impl_let,
+    )
+    logger.debug(content)
+
+    with open(proof_file, "a") as f:
+        f.write(content)
+
+
 def dystar_generate(args):
     folder = Path(args.folder)
-    generate_proof(folder, "Total")
-    generate_proof(folder, "Stateful")
+    if not args.file:
+        generate_proof(folder, "Total")
+        generate_proof(folder, "Stateful")
+    else:
+        file = Path(args.folder + "/" + args.file)
+        generate_code_single_file(file)

@@ -4,8 +4,8 @@ import re
 
 logger = logging.getLogger(__name__)
 
-find_val_declaration = r"val\s*[a-zA-Z_0-9]+:(\s*(\n)?[a-zA-Z:\s_0-9]+(->))+(\s*(\n)?[a-zA-Z\s_0-9\(\)]+\n)+"
-find_let_declaration = r"let\s+[a-z_0-9]+(\s+[a-z_0-9]+)+"
+find_val_declaration = r"^val\s*[a-zA-Z_0-9]+:(\s*(\n)?[a-zA-Z:\s_0-9\(\)&]+(->))+(\s*(\n)?[a-zA-Z\s_0-9\(\)&]+\n)+"
+find_let_declaration = r"^let\s+[a-z_0-9]+(\s+[a-z_0-9]+)+"
 
 
 def scan_val(file: Path) -> dict:

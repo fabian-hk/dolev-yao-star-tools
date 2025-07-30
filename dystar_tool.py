@@ -49,6 +49,9 @@ if __name__ == "__main__":
     parser_gen.add_argument(
         "folder", help="path to the folder containing the protocol implementation."
     )
+    parser_gen.add_argument(
+        "-f", "--file", help="specify a file in the folder for which a proof structure should be generated", default=None
+    )
     parser_gen.set_defaults(func=dystar_generate)
 
     args = parser.parse_args()
