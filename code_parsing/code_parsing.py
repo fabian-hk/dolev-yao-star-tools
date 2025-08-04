@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 import antlr4
@@ -5,13 +6,9 @@ from antlr4.TokenStreamRewriter import TokenStreamRewriter
 
 from FStarLexer import FStarLexer
 from FStarParser import FStarParser
-from FStarParser import FStarParser  # Redundant but safe for some linters
 from FStarVisitor import FStarVisitor
 from FStarListener import FStarListener
 
-
-
-import sys
 
 # Generate parsers: antlr4 -Dlanguage=Python3 FStar.g4
 
@@ -44,9 +41,9 @@ class ProgramRewriter(FStarVisitor):
     
 
 
-def parse_fstar_file():
+def parse_fstar_file(file_name: str):
     # Load input file
-    input_stream = antlr4.FileStream("Test1.Test.fst", encoding='utf-8')
+    input_stream = antlr4.FileStream(file_name, encoding='utf-8')
 
     # Lexer & Parser
     lexer = FStarLexer(input_stream)
@@ -83,7 +80,9 @@ def parse_fstar_file():
     #printer = ASTPrinter()
     #walker.walk(printer, tree)
 
-parse_fstar_file()
+file_name = os.environ.get("FILE_NAME")
+if file_name:
+    parse_fstar_file(file_name)
 
 
 

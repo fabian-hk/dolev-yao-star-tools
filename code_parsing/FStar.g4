@@ -34,6 +34,9 @@ EQ_COMP: '==';
 ARROW: '->';
 EQ: '=';
 COLON: ':';
+SEMICOLONSTAROPTION: ';*?';
+SEMICOLONSTAR: ';*';
+SEMICOLONOPTION: ';?';
 SEMICOLON: ';';
 COMMA: ',';
 LPAREN: '(';
@@ -53,14 +56,14 @@ INT: DIGIT+;
 STRING: '"' ( ~["\\] | '\\' . )* '"';
 CHAR: '\'' . '\'';
 
-WS: [ \t\r\n]*;
+WS: [ \t\r\n]+;
 LINE_COMMENT: '//' ~[\r\n]*;
 BLOCK_COMMENT: '(*' .*? '*)';
 Z3_OPTIONS: '#' .*? '\n';
 
 // ----------------- Parser rules -----------------
 
-program: moduleDecl WS (topLevelDecl WS)* EOF;
+program: moduleDecl WS (topLevelDecl WS?)* EOF;
 
 qualifiedName: ID ('.' ID)*;
 
@@ -70,47 +73,55 @@ openDecl: OPEN WS qualifiedName (WS LBRACE WS ID (COMMA WS ID)* WS RBRACE)?;
 
 topLevelDecl: openDecl | letDecl | assumeDecl | valDecl | Z3_OPTIONS | LINE_COMMENT | BLOCK_COMMENT;
 
-letDecl: LET WS (REC WS)? ID WS params WS (COLON WS typeExpr WS)? EQ WS expr;
+letDecl: LET WS (REC WS)? ID WS params (COLON WS typeExpr WS)? EQ WS expr;
 
 assumeDecl: ASSUME ID COLON typeExpr;
 
-valDecl: VAL WS ID WS COLON WS typeExpr;
+valDecl: VAL WS ID WS? COLON WS? typeExpr;
 
 param
-    : LPAREN ID COLON typeExpr RPAREN
+    : LPAREN WS? ID WS? COLON WS? typeExpr WS? RPAREN
     | ID
     ;
 
-params: param+;
+params: (param WS)+;
 
 typeExpr
     : TYPE
     | ID
-    | OPTION typeExpr
-    | ID AND ID
-    | ID typeExpr
-    | LPAREN typeExpr RPAREN
-    | typeExpr ARROW typeExpr
+    | OPTION WS typeExpr
+    | ID WS? AND WS? ID
+    | ID WS? typeExpr
+    | LPAREN WS? typeExpr WS? RPAREN
+    | typeExpr WS? ARROW WS? typeExpr
     ;
 
 letOptions: LETSTAROPTION | LETOPTION | LETSTAR | LET;
 
+semicolonOptions: SEMICOLON | SEMICOLONSTAR | SEMICOLONOPTION | SEMICOLONSTAROPTION;
+
 expr
     :  ID
     | STRING
+    | INT
     | UNDERSCORE
     | CHAR
     | qualifiedName
     | NONE
-    | SOME expr
-    | expr EQ expr
-    | expr AND_COMP expr
-    | expr OR_COMP expr
-    | letOptions qualifiedName EQ expr IN
-    | expr expr
-    | LPAREN expr RPAREN
-    | expr ARROW expr
-    | IF expr THEN expr ELSE expr
-    | FUN (param)+ ARROW expr
-    | MATCH qualifiedName WITH (PIPE expr ARROW expr)+
+    | SOME WS? expr
+    | expr WS? EQ WS? expr
+    | expr WS? AND_COMP WS? expr
+    | expr WS? OR_COMP WS? expr
+    | expr WS? semicolonOptions
+    | letOptions WS expr WS? EQ WS? expr WS? IN
+    | expr WS? expr
+    | expr WS? EQ WS? expr
+    | expr WS? COMMA WS? expr
+    | LPAREN WS? expr? WS? RPAREN
+    | LBRACE (WS? ID WS? EQ WS? expr WS? SEMICOLON? WS?)+ RBRACE
+    | LBRACE WS? ID WS? WITH (WS? ID WS? EQ WS? expr WS? SEMICOLON? WS?)+ RBRACE
+    | expr WS? ARROW WS? expr
+    | IF WS expr WS? THEN WS? expr WS? ELSE WS? expr
+    | FUN WS? (param)+ WS? ARROW WS? expr
+    | MATCH WS qualifiedName WS WITH WS? (PIPE WS? expr WS? ARROW WS? expr WS?)+
     ;
