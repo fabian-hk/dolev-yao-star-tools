@@ -84,6 +84,7 @@ def dystar_visualization(args):
     png_file = Path(f"{os.path.basename(program_path)}.png")
     png_file.write_bytes(png_raw)
 
-    # Open the generated PNG file in
-    # the default image viewer.
-    subprocess.Popen(["xdg-open", str(png_file)])
+    # Open the generated PNG file in the default image viewer
+    # only if the OPEN_VIEWER environment variable is set to a truthy value.
+    if os.environ.get("OPEN_VIEWER", "true").lower() == "true":
+        subprocess.Popen(["xdg-open", str(png_file)])
