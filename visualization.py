@@ -11,7 +11,9 @@ def find_principals(lines: list[dict]):
     for line in lines:
         if line["Type"] == "Session":
             if line["Principal"] not in principals:
-                principals.append(line["Principal"])
+                principals.append(line["Principal"].lower())
+        elif line["Type"] == "Event":
+                principals.append(line["Principal"].lower())
     return principals
 
 def preprocess_content(line):
@@ -45,12 +47,12 @@ def dystar_visualization(args):
         if line["Type"] == "Session":
             if not namespaces or line["Tag"] in namespaces:
                 plantuml.append(
-                    f"note over \"{line['Principal']}\": State {preprocess_content(line)}"
+                    f"note over \"{line['Principal'].capitalize()}\": State {preprocess_content(line)}"
                 )
         # Use events to find out at which principal
         # we are right now in the protocol run.
         elif line["Type"] == "Event":
-            last_principal = line["Principal"]
+            last_principal = line["Principal"].lower()
             # Use debug event to determine who the receiver is
             if line["Tag"] == "DY.Lib.Printing.DebugEvent":
                 debug_info = json.loads(line["Content"])
@@ -70,7 +72,7 @@ def dystar_visualization(args):
                 principals_copy.remove(sender)
                 receiver = principals_copy[0]
             
-            plantuml.append(f"\"{sender}\" -> \"{receiver}\" : {preprocess_content(line)}")
+            plantuml.append(f"\"{sender.capitalize()}\" -> \"{receiver.capitalize()}\" : {preprocess_content(line)}")
             receiver = None
     plantuml.append("@enduml")
 

@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 import argparse
+import sys
 
 from visualization import dystar_visualization
 from validation import dystar_validation
 from generation import dystar_generate
+from time_verify_lean import add_benchmark_arguments
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
@@ -54,5 +56,16 @@ if __name__ == "__main__":
     )
     parser_gen.set_defaults(func=dystar_generate)
 
+    # ******* Subparser for Lean Benchmarking *******
+    parser_benchmark = subparsers.add_parser(
+        "benchmark",
+        help="Time Lean verification in the current working directory.",
+        description="Discover and time Lean files in the current working directory's Lake project.",
+    )
+    add_benchmark_arguments(parser_benchmark)
+
     args = parser.parse_args()
-    args.func(args)
+    if not hasattr(args, "func"):
+        parser.print_help()
+        sys.exit(0)
+    sys.exit(args.func(args))
