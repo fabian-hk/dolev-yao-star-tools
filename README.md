@@ -16,6 +16,15 @@ The command `./dystar_tool vis <DYSTAR_EXE>` runs an executable DY*
 protocol run and converts the output into a Plantuml
 sequence diagram.
 
+**Note:** If you run your own docker image of Plantuml use the following command to start the server:
+
+```bash
+docker run -d -p 8080:8080 \
+  # Important to print the full diagram 
+  -e PLANTUML_LIMIT_SIZE=16384 \ 
+  plantuml/plantuml-server:jetty
+```
+
 ## Validation
 
 The command `./dystar_tool val <DYSTAR_PROTOCOL_FOLDER>` runs some

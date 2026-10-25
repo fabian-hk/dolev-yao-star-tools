@@ -39,7 +39,7 @@ def dystar_visualization(args):
 
     principals = find_principals(lines)
 
-    last_principal = "alice"
+    last_principal = principals[0] if principals else "alice"
     receiver = None
     plantuml = ["@startuml", "skinparam dpi 300", "scale 1000 width"]
     for line in lines:
@@ -59,7 +59,11 @@ def dystar_visualization(args):
                 receiver = debug_info["receiver"]
         # Draw messages to the plantuml diagram
         # as arrows from one principal to another
-        elif line["Type"] == "Message":
+        # Note: DyLean sends messages to the network
+        # when a public key or verification key is 
+        # generated. We don't want to print these 
+        # messages. Therefore we filter them out here.
+        elif line["Type"] == "Message" and not line["Content"].startswith(("Vk", "Pk")):
             # We assume that the last active principal is
             # sending the message.
             sender = last_principal
@@ -89,4 +93,4 @@ def dystar_visualization(args):
     # Open the generated PNG file in the default image viewer
     # only if the OPEN_VIEWER environment variable is set to a truthy value.
     if os.environ.get("OPEN_VIEWER", "true").lower() == "true":
-        subprocess.Popen(["xdg-open", str(png_file)])
+        subprocess.Popen(["xdg-open", str(png_file.resolve())])
